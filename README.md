@@ -15,9 +15,6 @@ Welcome to the Local RAG Chatbot repository! This project demonstrates how to bu
 4.  [Installation](#installation)
 5.  [Usage](#usage)
 6.  [Customization](#customization)
-7.  [Troubleshooting](#troubleshooting)
-8.  [Contributing](#contributing)
-9.  [License](#license)
 
 ## 1. Introduction
 
