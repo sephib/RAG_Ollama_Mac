@@ -109,7 +109,7 @@ Before getting started, ensure you have the following installed:
 * **Ollama Issues:** If you encounter issues with Ollama, refer to the official Ollama documentation.
 * **Dependency Issues:** Ensure all dependencies are installed correctly. If you encounter errors, try reinstalling the virtual environment.
 * **Model Loading Issues:** Verify that the DeepSeek-R1 model is pulled correctly in Ollama.
-* **Document Processing Issues:** Ensure the document formats are supported and that the documents are accessible.
+
 
 ## 8. Contributing
 
