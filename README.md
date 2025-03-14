@@ -76,13 +76,7 @@ Before getting started, ensure you have the following installed:
     ollama serve
     ```
 
-3.  **Run the Streamlit Application:**
-
-    ```bash
-    streamlit run app.py
-    ```
-
-4.  **Upload Documents:**
+3.  **Upload Documents:**
     
     To upload your documents, update the path of the pdf file in the code and run:
     ```bash
@@ -91,6 +85,12 @@ Before getting started, ensure you have the following installed:
     To remove all the data in your vector database:
     ```bash
     python .\src\load_docs.py "--reset"
+    ```
+
+4.  **Run the Streamlit Application:**
+
+    ```bash
+    streamlit run app.py
     ```
     
 6.  **Chat with the Bot:**
@@ -111,8 +111,8 @@ Before getting started, ensure you have the following installed:
 * **Model Loading Issues:** Verify that the DeepSeek-R1 model is pulled correctly in Ollama.
 
 
-## 8. Contributing
-
+## 8. To Run
+Open Command Promt/terminal
 Contributions are welcome! Please follow these guidelines:
 
 1.  Fork the repository.
