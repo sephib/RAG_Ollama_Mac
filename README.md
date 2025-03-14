@@ -110,13 +110,3 @@ Before getting started, ensure you have the following installed:
 * **Dependency Issues:** Ensure all dependencies are installed correctly. If you encounter errors, try reinstalling the virtual environment.
 * **Model Loading Issues:** Verify that the DeepSeek-R1 model is pulled correctly in Ollama.
 
-
-## 8. To Run
-Open Command Promt/terminal
-Contributions are welcome! Please follow these guidelines:
-
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Commit your changes with clear and concise messages.
-4.  Push your changes to your fork.
-5.  Submit a pull request.
