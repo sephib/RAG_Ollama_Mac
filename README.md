@@ -65,7 +65,7 @@ Before getting started, ensure you have the following installed:
 3.  **Install Dependencies:**
 
     ```bash
-    pip install -r requirements.txt
+    pip install -r .\src\requirements.txt
     ```
 
 ## 5. Usage
