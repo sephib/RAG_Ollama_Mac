@@ -104,7 +104,7 @@ Before getting started, ensure you have the following installed:
 
 ## 6. Customization
 
-* **Modify Prompts:** Edit the prompt templates in `app.py` to customize the chatbot's behavior.
+* **Modify Prompts:** Edit the prompt templates in `UI.py` to customize the chatbot's behavior.
 * **Change Models:** You can replace DeepSeek-R1 with other models supported by Ollama. Remember to update the Ollama pull command and the model name in the code.
 * **Adjust Retrieval Parameters:** Fine-tune the retrieval parameters in the code to optimize document retrieval.
 * **Extend Functionality:** Add more features to the Streamlit interface or integrate with other tools.
