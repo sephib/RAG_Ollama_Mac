@@ -46,7 +46,8 @@ Before getting started, ensure you have the following installed:
 
 * **Python 3.7+:** Python is required for running the application.
 * **Ollama:** Download and install Ollama from ([https://ollama.com/]).
-* **DeepSeek-R1 Model:** Pull the DeepSeek-R1 model in Ollama by running `ollama pull deepseek-r1`.
+* **gemma3n Model:** Pull the Gemma3n model in Ollama by running `ollama pull gemma3n`.
+* **toshk0/nomic-embed-text-v2-moe:Q6_K embeddings:** Pull the nomic-embed-text-v2 embeddings in Ollama by running `ollama pull toshk0/nomic-embed-text-v2-moe:Q6_K`.
 * **Pip:** Python package installer.
 
 ## 4. Installation
@@ -77,8 +78,8 @@ Before getting started, ensure you have the following installed:
     In another tab of command prompt/ terminal run the below
     ```bash
     ollama serve
-    ollama pull deepseek-r1
-    ollama pull nomic-embed-text
+    ollama pull gemma3n
+    ollama pull toshk0/nomic-embed-text-v2-moe:Q6_K
     ```
 
 3.  **Upload Documents:**
