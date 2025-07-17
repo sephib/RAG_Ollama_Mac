@@ -1,7 +1,7 @@
 import argparse
-from langchain.vectorstores.chroma import Chroma
+from langchain_chroma import Chroma  # Updated import for Chroma
+from langchain_ollama import OllamaLLM  # Updated import for Ollama
 from langchain.prompts import ChatPromptTemplate
-from langchain_community.llms.ollama import Ollama
 from embedding import get_embedding_function
 import re
 
@@ -43,9 +43,9 @@ def query_rag(query: str):
     prompt = prompt_template.format(context=context, question=query)
     # print(prompt)
 
-    #model = Ollama(model="mistral")
-    model = Ollama(model="deepseek-r1")
-    #model = Ollama(model="llama3")
+    #model = OllamaLLM(model="mistral")
+    model = OllamaLLM(model="gemma3n:e4b")
+    #model = OllamaLLM(model="llama3")
     response_text = model.invoke(prompt)
     response = remove_think_tags(response_text)
 

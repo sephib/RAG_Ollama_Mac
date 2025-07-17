@@ -2,27 +2,27 @@ from langchain_community.document_loaders import PyPDFLoader
 import argparse
 import os
 import shutil
-from langchain.document_loaders.pdf import PyPDFDirectoryLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from embedding import get_embedding_function
-from langchain.vectorstores.chroma import Chroma
+from langchain_chroma import Chroma
 
-import os
-import sys
+# Get current working directory and data path
 cwd = os.getcwd()
-data_path = os.path.join(cwd, "..\data\monopoly.pdf")
-data_path = r"D:\Users\pruth\RAGProject\data\AtomicHabbits.pdf"
-print(data_path)
-
+DATA_PATH = os.path.join(cwd, "data")  # This is now a folder, not a single file
 CHROMA_PATH = "chroma"
-DATA_PATH = data_path
-
 
 def load_documents():
-    
-    document_loader = PyPDFLoader(data_path)
-    return document_loader.load()
+    documents = []
+    # Loop through all PDF files in the data folder
+    for filename in os.listdir(DATA_PATH):
+        if filename.endswith(".pdf"):
+            file_path = os.path.join(DATA_PATH, filename)
+            loader = PyPDFLoader(file_path)
+            documents.extend(loader.load())
+    return documents
+
 
 def split_documents(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
@@ -35,13 +35,11 @@ def split_documents(documents: list[Document]):
 
 def add_to_db(chunks: list[Document]):
     # Load the existing database.
-    
     db = Chroma(
         persist_directory=CHROMA_PATH, embedding_function=get_embedding_function()
     )
-    chunks_with_ids = calculate_chunk_ids(chunks) # Giving each chunk an ID
+    chunks_with_ids = calculate_chunk_ids(chunks)  # Giving each chunk an ID
 
-    
     # Add or Update the documents.
     existing_items = db.get(include=[])  # IDs are always included by default
     existing_ids = set(existing_items["ids"])
@@ -57,9 +55,8 @@ def add_to_db(chunks: list[Document]):
         print(f"👉 Adding new documents: {len(new_chunks)}")
         new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
         db.add_documents(new_chunks, ids=new_chunk_ids)
-        db.persist()
     else:
-        print(" all documents are added")
+        print("All documents are already added.")
 
 
 
