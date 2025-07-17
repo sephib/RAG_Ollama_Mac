@@ -1,7 +1,11 @@
-# RAG_Ollama_Deepseek_Streamlit
- Local RAG Chatbot leveraging deepseek R1
+# RAG_Ollama_Deepseek_Streamlit_Mac
+ Local RAG Chatbot leveraging deepseek R1 to run on Mac
+ Based on this repo by pruthvirajcyn https://github.com/pruthvirajcyn/RAG_Ollama_Deepseek_Streamlit; https://medium.com/@pruthvirajc/implementing-a-local-rag-chat-bot-with-ollama-streamlit-and-deepseek-r1-a-practical-guide-46b1903f011f
+
+ I use this repo for my local RAG, I will update to latest requirements and try out different models.
+ As of today, 20250717, I am going to try nomic v2 embeddings and gemma3n.
  
- To run the application use the following command: streamlit run UI.py
+ To run the application use the following command: streamlit run ./src/UI.py
 
 # Local RAG Chatbot with Ollama, Streamlit, and DeepSeek-R1
 
@@ -50,7 +54,7 @@ Before getting started, ensure you have the following installed:
 1.  **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/pruthvirajcyn/RAG_Ollama_Deepseek_Streamlit.git
+    git clone https://github.com/eplt/RAG_Ollama_Deepseek_Streamlit_Mac.git
     cd RAG_Ollama_Deepseek_Streamlit
     ```
 
@@ -58,14 +62,13 @@ Before getting started, ensure you have the following installed:
 
     ```bash
     python3 -m venv venv
-    source venv/bin/activate  # On macOS/Linux
-    venv\Scripts\activate  # On Windows
+    source venv/bin/activate
     ```
 
 3.  **Install Dependencies:**
 
     ```bash
-    pip install -r .\src\requirements.txt
+    pip install -r ./src/requirements.txt
     ```
 
 ## 5. Usage
@@ -74,23 +77,25 @@ Before getting started, ensure you have the following installed:
     In another tab of command prompt/ terminal run the below
     ```bash
     ollama serve
+    ollama pull deepseek-r1
+    ollama pull nomic-embed-text
     ```
 
 3.  **Upload Documents:**
     
-    To upload your documents, update the path of the pdf file in the code and run:
+    To upload your documents, put all pdf files in the data folder and run:
     ```bash
-    python .\src\load_docs.py
+    python ./src/load_docs.py
     ```
-    To remove all the data in your vector database:
+    To reload/reset all the data in your vector database:
     ```bash
-    python .\src\load_docs.py "--reset"
+    python ./src/load_docs.py "--reset"
     ```
 
 4.  **Run the Streamlit Application:**
 
     ```bash
-    streamlit run app.py
+    streamlit run ./src/UI.py
     ```
     
 6.  **Chat with the Bot:**
