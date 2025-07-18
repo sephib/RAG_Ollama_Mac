@@ -1,118 +1,138 @@
-# RAG_Ollama_Deepseek_Streamlit_Mac
- Local RAG Chatbot leveraging deepseek R1 to run on Mac
- Based on this repo by pruthvirajcyn https://github.com/pruthvirajcyn/RAG_Ollama_Deepseek_Streamlit; https://medium.com/@pruthvirajc/implementing-a-local-rag-chat-bot-with-ollama-streamlit-and-deepseek-r1-a-practical-guide-46b1903f011f
+# 🧠 Local RAG Chatbot with Ollama on Mac
 
- I use this repo for my local RAG, I will update to latest requirements and try out different models.
- As of today, 20250717, I am going to try nomic v2 embeddings and gemma3n.
- 
- To run the application use the following command: streamlit run ./src/UI.py
+> Lightweight, private, and customizable retrieval-augmented chatbot running entirely on your Mac.
 
-# Local RAG Chatbot with Ollama, Streamlit, and DeepSeek-R1
+Based on the excellent work by [pruthvirajcyn](https://github.com/pruthvirajcyn/RAG_Ollama_Deepseek_Streamlit) and his [Medium article](https://medium.com/@pruthvirajc/implementing-a-local-rag-chat-bot-with-ollama-streamlit-and-deepseek-r1-a-practical-guide-46b1903f011f).
 
-Welcome to the Local RAG Chatbot repository! This project demonstrates how to build a fully local Retrieval Augmented Generation (RAG) chatbot using Ollama, Streamlit, and the DeepSeek-R1 model. This setup allows you to create a powerful, privacy-focused conversational AI that operates entirely on your local machine.
+---
 
-## Table of Contents
+## ⚙️ About This Project
 
-1.  [Introduction](#introduction)
-2.  [Features](#features)
-3.  [Prerequisites](#prerequisites)
-4.  [Installation](#installation)
-5.  [Usage](#usage)
-6.  [Customization](#customization)
+This is my personal implementation of a local RAG (Retrieval-Augmented Generation) chatbot using:
 
-## 1. Introduction
+- [Ollama](https://ollama.com/) for running open-source LLMs and embedding models locally.
+- [Streamlit](https://streamlit.io/) for a clean and interactive chat UI.
+- [ChromaDB](https://www.trychroma.com/) for storing and querying vector embeddings.
 
-This repository provides the code and instructions to implement a local RAG chatbot. The chatbot leverages:
+As of **2025-07-17**, I'm using:
 
-* **Ollama:** Ollama is a lightweight, extensible framework for building and running large language models such as llama, mistral, deepseek, etc. on the local machine. IN this project we run the DeepSeek-R1 large language model locally. 
-* **Streamlit:** Our project enables communication through a chatbot interface, leveraging Streamlit, a highly intuitive and user-friendly tool for building interactive web applications.
-* **DeepSeek-R1:** A powerful open-source language model for generating human-like responses.
-* **Retrieval Augmented Generation (RAG):** To enhance the chatbot's responses with relevant information from local documents.
+- 🔍 Embedding model: `nomic-embed-text-v2-moe`
+- 🧠 LLM: `gemma3n`
 
-The core idea is to provide a practical guide for users who wish to build a secure and customizable chatbot without relying on external APIs or cloud services.
+---
 
-## 2. Features
+## 💡 Why Run a RAG Locally?
 
-* **Local Execution:** Runs entirely on your local machine, ensuring data privacy and security.
-* **Document Ingestion:** Allows users to upload and index local documents for RAG.
-* **Interactive Chat Interface:** Provides a user-friendly Streamlit interface for interacting with the chatbot.
-* **DeepSeek-R1 Integration:** Utilizes the DeepSeek-R1 model for high-quality responses.
-* **Customizable Prompting:** Enables users to modify prompts for tailored chatbot behavior.
-* **Simple Setup:** Designed for easy installation and configuration.
+- **🔒 Privacy**: No data is sent to the cloud. Upload and query your documents entirely offline.
+- **💸 Cost-effective**: No API tokens or cloud GPU costs. You only pay electricity.
+- **📚 Better than summarizing**: With long PDFs or multiple documents, even summaries may not contain the context you need. A RAG chatbot can drill deeper and provide contextual answers.
 
-## 3. Prerequisites
+> ✅ Recommended: At least **16GB of RAM** on your Mac. Preferably 24GB+ for smoother experience.
 
-Before getting started, ensure you have the following installed:
+---
 
-* **Python 3.7+:** Python is required for running the application.
-* **Ollama:** Download and install Ollama from ([https://ollama.com/]).
-* **gemma3n Model:** Pull the Gemma3n model in Ollama by running `ollama pull gemma3n`.
-* **toshk0/nomic-embed-text-v2-moe:Q6_K embeddings:** Pull the nomic-embed-text-v2 embeddings in Ollama by running `ollama pull toshk0/nomic-embed-text-v2-moe:Q6_K`.
-* **Pip:** Python package installer.
+## 🛠️ 1. Installation
 
-## 4. Installation
+### 1. Clone the Repository
 
-1.  **Clone the Repository:**
+```bash
+git clone https://github.com/eplt/RAG_Ollama_Mac.git
+cd RAG_Ollama_Mac
+```
 
-    ```bash
-    git clone https://github.com/eplt/RAG_Ollama_Deepseek_Streamlit_Mac.git
-    cd RAG_Ollama_Deepseek_Streamlit
-    ```
+### 2. Create a Virtual Environment
 
-2.  **Create a Virtual Environment (Recommended):**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+### 3. Install Dependencies
 
-3.  **Install Dependencies:**
+```bash
+pip install -r ./src/requirements.txt
+```
 
-    ```bash
-    pip install -r ./src/requirements.txt
-    ```
+---
 
-## 5. Usage
+## 🚀 2. Usage
 
-1.  **Run Ollama:**
-    In another tab of command prompt/ terminal run the below
-    ```bash
-    ollama serve
-    ollama pull gemma3n
-    ollama pull toshk0/nomic-embed-text-v2-moe:Q6_K
-    ```
+### 1. Start Ollama and Pull the Models
 
-3.  **Upload Documents:**
-    
-    To upload your documents, put all pdf files in the data folder and run:
-    ```bash
-    python ./src/load_docs.py
-    ```
-    To reload/reset all the data in your vector database:
-    ```bash
-    python ./src/load_docs.py "--reset"
-    ```
+```bash
+ollama serve
+ollama pull gemma3n
+ollama pull toshk0/nomic-embed-text-v2-moe:Q6_K
+```
 
-4.  **Run the Streamlit Application:**
+### 2. Load Documents
 
-    ```bash
-    streamlit run ./src/UI.py
-    ```
-    
-6.  **Chat with the Bot:**
+Place your `.pdf` files in the `data/` directory.
 
-    Enter your queries in the chat input and receive responses augmented with information from your documents.
+```bash
+python ./src/load_docs.py
+```
 
-## 6. Customization
+To reset and reload the vector database:
 
-* **Modify Prompts:** Edit the prompt templates in `UI.py` to customize the chatbot's behavior.
-* **Change Models:** You can replace DeepSeek-R1 with other models supported by Ollama. Remember to update the Ollama pull command and the model name in the code.
-* **Adjust Retrieval Parameters:** Fine-tune the retrieval parameters in the code to optimize document retrieval.
-* **Extend Functionality:** Add more features to the Streamlit interface or integrate with other tools.
+```bash
+python ./src/load_docs.py --reset
+```
 
-## 7. Troubleshooting
+### 3. Launch the Chatbot Interface
 
-* **Ollama Issues:** If you encounter issues with Ollama, refer to the official Ollama documentation.
-* **Dependency Issues:** Ensure all dependencies are installed correctly. If you encounter errors, try reinstalling the virtual environment.
-* **Model Loading Issues:** Verify that the DeepSeek-R1 model is pulled correctly in Ollama.
+```bash
+streamlit run ./src/UI.py
+```
 
+### 4. Start Chatting
+
+Ask questions and the chatbot will respond using relevant context retrieved from your documents.
+
+---
+
+## 🧩 3. Customization
+
+- **✏️ Modify Prompts**  
+  Update prompt templates in `UI.py` to guide the chatbot’s tone or behavior.
+
+- **🔄 Try Different Models**  
+  Ollama supports various LLMs and embedding models. Run `ollama list` to see what’s available or try pulling new ones.
+
+- **⚙️ Tune Retrieval Parameters**  
+  Adjust chunk size, overlaps, or top-K retrieval values in `load_docs.py` for improved performance.
+
+- **🚀 Extend the Interface**  
+  Add features like file upload, chat history, user authentication, or export options using Streamlit’s powerful features.
+
+---
+
+## 🧯 4. Troubleshooting
+
+- **Ollama not running?**  
+  Make sure `ollama serve` is active in a terminal tab.
+
+- **Missing models?**  
+  Run `ollama list` to verify models are downloaded correctly.
+
+- **Dependency issues?**  
+  Double-check your Python version (3.7+) and re-create the virtual environment.
+
+- **Streamlit errors?**  
+  Ensure you're running the app from the correct path and activate your virtual environment.
+
+---
+
+## 📌 Notes & Future Plans
+
+- Planning to support non-PDF formats (Markdown, .txt, maybe HTML).
+- Will experiment with additional LLMs like `phi-3`, `mistral`, and `llama3`.
+- Might integrate chat history persistence and better document management.
+
+---
+
+## 👋 Final Thoughts
+
+Local RAG is now more accessible than ever. With powerful small models and tools like Ollama, anyone can build a private, intelligent assistant — no cloud needed.
+
+If you found this useful or have ideas to improve it, feel free to open a PR or drop a star ⭐️
