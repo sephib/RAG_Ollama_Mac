@@ -17,5 +17,11 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "googletrans>=4.0.2",
+    "ipykernel>=6.30.1",
+    "langdetect>=1.0.9",
+    "pdfplumber>=0.11.7",
+    "pytesseract>=0.3.13",
     "pytest>=8.4.2",
+    "textual>=6.1.0",
 ]

@@ -6,3 +6,4 @@ tmp/*
 chroma/*
 *.pyc
 
+data/*
