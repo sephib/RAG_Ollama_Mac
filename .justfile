@@ -4,12 +4,11 @@ run:
 run-streamlit:
     uv run streamlit run ./src/UI.py
 
-# update settings for changing 
+# Load documents into vector database
 doc-load:
-    uv run python src/load_docs_mps.py 
+    uv run python src/load_docs.py 
 
-# uv run python ./src/load_docs.py
-
+# Reset and reload documents
 doc-reset:
     uv run python src/load_docs.py --reset
 

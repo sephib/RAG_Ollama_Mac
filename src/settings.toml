@@ -10,9 +10,51 @@ chunk_overlap = 80
 length_function = "len"
 is_separator_regex = false
 
+[embedding]
+# Embedding model configuration
+model = "toshk0/nomic-embed-text-v2-moe:Q6_K"
+
+[rag]
+# RAG system configuration
+model = "gemma3n:latest"
+search_count = 5
+prompt_template = """
+Answer the question based only on the following context:
+
+{context}
+
+---
+
+Answer the question based on the above context in a brief: {question}
+"""
+
 [performance]
 # Apple Silicon optimization settings
-batch_size = 400          # Optimal batch size for memory efficiency
-max_workers = 8          # Max parallel processes (auto-detected if 0)
-use_mps = true          # Enable Metal Performance Shaders if available
-memory_efficient = true  # Use memory-optimized processing
+
+# How many documents to process at once during splitting/embedding operations
+# Higher values = faster processing but more memory usage
+# Recommended: 200-400 for Apple Silicon, 50-100 for older hardware
+batch_size = 400
+
+# Maximum parallel processes for PDF loading
+# Set to 0 for auto-detection based on CPU cores
+# Recommended: 4-8 for most systems
+max_workers = 8
+
+# Enable Metal Performance Shaders on Apple Silicon for faster embedding
+# Only works on M1/M2/M3 Macs with compatible models
+use_mps = true
+
+# Use memory-optimized processing algorithms
+# Enables chunked processing to prevent memory overflow
+memory_efficient = true
+
+# When to switch from simple to batched processing (with progress bars)
+# If new documents > this number, show progress bars and use batching
+# Lower values = more progress feedback, higher values = less overhead
+batch_threshold = 100
+
+# Maximum batch size limit for memory-constrained operations
+# Acts as a ceiling for batch_size to prevent memory issues
+# Should be <= batch_size, used in load_docs_mps.py for Apple Silicon
+memory_limit = 400

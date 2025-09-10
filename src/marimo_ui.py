@@ -132,11 +132,8 @@ def _(mo):
         
         **To add documents:** Configure the input folder in `src/settings.toml` and run:
         ```bash
-        # Standard loading
+        # Load documents (optimized for all systems including Apple Silicon)
         uv run src/load_docs.py
-        
-        # Apple Silicon optimized loading
-        uv run src/load_docs_mps.py
         ```
         
         **Configuration:** Edit `src/settings.toml` to customize:

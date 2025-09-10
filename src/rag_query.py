@@ -16,16 +16,6 @@ settings = Dynaconf(
 
 CHROMA_PATH = settings.pdf_processing.chroma_path
 
-PROMPT = """
-Answer the question based only on the following context:
-
-{context}
-
----
-
-Answer the question based on the above context in a brief: {question}
-"""
-
 
 def main():
     # Create CLI.
@@ -47,14 +37,25 @@ def query_rag_with_sources(query: str):
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
 
     # Search the DB.
-    results = db.similarity_search_with_score(query, k=5)
+    search_count = settings.get('rag.search_count', 5)
+    results = db.similarity_search_with_score(query, k=search_count)
 
     context = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
-    prompt_template = ChatPromptTemplate.from_template(PROMPT)
+    prompt_template_text = settings.get('rag.prompt_template', """
+Answer the question based only on the following context:
+
+{context}
+
+---
+
+Answer the question based on the above context in a brief: {question}
+""")
+    prompt_template = ChatPromptTemplate.from_template(prompt_template_text)
     prompt = prompt_template.format(context=context, question=query)
 
     # model = OllamaLLM(model="mistral")
-    model = OllamaLLM(model="gemma3n:latest")
+    model_name = settings.get('rag.model', 'gemma3n:latest')
+    model = OllamaLLM(model=model_name)
     # model = OllamaLLM(model="gemma3n:e4b")
     # model = OllamaLLM(model="llama3")
     response_text = model.invoke(prompt)
