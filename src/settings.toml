@@ -1,0 +1,18 @@
+[pdf_processing]
+# input_folder = "data/original_pdfs"
+input_folder = "data/renamed_pdfs"
+# chroma_path = "data/chroma"
+chroma_path = "data/chroma_renamed_pdfs"
+
+[text_splitter]
+chunk_size = 800
+chunk_overlap = 80
+length_function = "len"
+is_separator_regex = false
+
+[performance]
+# Apple Silicon optimization settings
+batch_size = 400          # Optimal batch size for memory efficiency
+max_workers = 8          # Max parallel processes (auto-detected if 0)
+use_mps = true          # Enable Metal Performance Shaders if available
+memory_efficient = true  # Use memory-optimized processing

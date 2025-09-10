@@ -13,6 +13,8 @@ dependencies = [
     "langchain-chroma>=0.2.5",
     "langchain-ollama>=0.3.7",
     "pypdf>=6.0.0",
+    "dynaconf>=3.2.11",
+    "torch>=2.8.0",
 ]
 
 [dependency-groups]
@@ -24,4 +26,5 @@ dev = [
     "pytesseract>=0.3.13",
     "pytest>=8.4.2",
     "textual>=6.1.0",
+    "tqdm>=4.67.1",
 ]
