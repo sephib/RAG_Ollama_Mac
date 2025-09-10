@@ -1,13 +1,15 @@
 import argparse
+import re
+
+from langchain.prompts import ChatPromptTemplate
 from langchain_chroma import Chroma  # Updated import for Chroma
 from langchain_ollama import OllamaLLM  # Updated import for Ollama
-from langchain.prompts import ChatPromptTemplate
+
 from embedding import get_embedding_function
-import re
 
 CHROMA_PATH = "chroma"
 
-PROMPT= """
+PROMPT = """
 Answer the question based only on the following context:
 
 {context}
@@ -16,6 +18,7 @@ Answer the question based only on the following context:
 
 Answer the question based on the above context in a brief: {question}
 """
+
 
 def main():
     # Create CLI.
@@ -26,9 +29,9 @@ def main():
     query_rag(query_text)
 
 
-
 def remove_think_tags(response):
-    return re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
+    return re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL)
+
 
 def query_rag(query: str):
     # Prepare the DB.
@@ -43,9 +46,10 @@ def query_rag(query: str):
     prompt = prompt_template.format(context=context, question=query)
     # print(prompt)
 
-    #model = OllamaLLM(model="mistral")
-    model = OllamaLLM(model="gemma3n:e4b")
-    #model = OllamaLLM(model="llama3")
+    # model = OllamaLLM(model="mistral")
+    model = OllamaLLM(model="gemma3n:latest")
+    # model = OllamaLLM(model="gemma3n:e4b")
+    # model = OllamaLLM(model="llama3")
     response_text = model.invoke(prompt)
     response = remove_think_tags(response_text)
 

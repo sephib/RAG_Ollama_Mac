@@ -1,17 +1,19 @@
-from langchain_community.document_loaders import PyPDFLoader
 import argparse
 import os
 import shutil
-from langchain_community.document_loaders import PyPDFDirectoryLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 from langchain.schema.document import Document
-from embedding import get_embedding_function
 from langchain_chroma import Chroma
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from embedding import get_embedding_function
 
 # Get current working directory and data path
 cwd = os.getcwd()
 DATA_PATH = os.path.join(cwd, "data")  # This is now a folder, not a single file
 CHROMA_PATH = "chroma"
+
 
 def load_documents():
     documents = []
@@ -32,6 +34,7 @@ def split_documents(documents: list[Document]):
         is_separator_regex=False,
     )
     return text_splitter.split_documents(documents)
+
 
 def add_to_db(chunks: list[Document]):
     # Load the existing database.
@@ -59,9 +62,7 @@ def add_to_db(chunks: list[Document]):
         print("All documents are already added.")
 
 
-
 def calculate_chunk_ids(chunks):
-
     # This will create IDs like "data/monopoly.pdf:6:2"
     # Page Source : Page Number : Chunk Index
 
@@ -88,10 +89,10 @@ def calculate_chunk_ids(chunks):
 
     return chunks
 
+
 def clear_database():
     if os.path.exists(CHROMA_PATH):
         shutil.rmtree(CHROMA_PATH)
-
 
 
 def main():
@@ -107,7 +108,6 @@ def main():
     documents = load_documents()
     chunks = split_documents(documents)
     add_to_db(chunks)
-
 
 
 if __name__ == "__main__":

@@ -1,5 +1,4 @@
 from langchain_ollama import OllamaEmbeddings
-from langchain_community.embeddings.bedrock import BedrockEmbeddings
 
 
 def get_embedding_function():
@@ -8,5 +7,5 @@ def get_embedding_function():
     )
     """
     embeddings = OllamaEmbeddings(model="toshk0/nomic-embed-text-v2-moe:Q6_K")
-    #embeddings = OllamaEmbeddings(model="mxbai-embed-large")
+    # embeddings = OllamaEmbeddings(model="mxbai-embed-large")
     return embeddings

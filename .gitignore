@@ -1,0 +1,8 @@
+.envrc
+.python-version
+tmp/*
+
+.DS_Store
+chroma/*
+*.pyc
+
